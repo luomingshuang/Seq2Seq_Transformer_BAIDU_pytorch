@@ -33,10 +33,10 @@ vocab_size = 94
 word_length = 6
 imgs_padding = 75
 
-imgs_path = '/data/f/yangshuang/DATASET/BAIDU/lip_imgs'
-annotation_root = '/data/f/yangshuang/DATASET/BAIDU/sentences_data'
-trn_txt = '/data/f/yangshuang/DATASET/BAIDU/sentences_data/trn_seqs_ys.txt'
-val_txt = '/data/f/yangshuang/DATASET/BAIDU/sentences_data/val_seqs_ys.txt'
-tst_txt = '/data/f/yangshuang/DATASET/BAIDU/sentences_data/tst_seqs_ys.txt'
+imgs_path = '.../BAIDU/lip_imgs'
+annotation_root = '.../BAIDU/sentences_data'
+trn_txt = '.../BAIDU/sentences_data/trn_seqs_ys.txt'
+val_txt = '.../BAIDU/sentences_data/val_seqs_ys.txt'
+tst_txt = '.../BAIDU/sentences_data/tst_seqs_ys.txt'
 
 pickle_file = 'BAIDU.pickle'

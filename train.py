@@ -88,9 +88,10 @@ def train_net(args):
 
     # Custom dataloaders
     train_dataset = AiShellDataset(args, 'train')
-    #print(train_dataset[0][0].size())
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, pin_memory=True, shuffle=True, num_workers=args.num_workers)
+
     valid_dataset = AiShellDataset(args, 'val')
+    #valid_dataset = AishellDataset(args, 'tst')
     valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=args.batch_size, pin_memory=True, shuffle=True, num_workers=args.num_workers)
 
     # Epochs
@@ -142,13 +143,9 @@ def train(train_loader, model, optimizer, epoch, logger, k):
     for i, (data) in enumerate(train_loader):
         # Move to GPU, if available
         padded_input, padded_target = data
-        #padded_input, padded_target = data
-
         padded_input = padded_input.to(device)
         padded_target = padded_target.to(device)
         pred, gold = model(padded_input, padded_target)
-        #print(pred.size(), gold.size())
-        #print(pred.size(), gold.size())
         loss, n_correct = cal_performance(pred, gold, smoothing=args.label_smoothing)
 
         # Back prop.
@@ -210,28 +207,15 @@ def valid(valid_loader, model, logger):
 
                 gold_txt = []
                 for arr in gold.cpu().numpy():
-                    #print(arr)
-                    #golds = []
-                    # for one in arr:
-                    #     if one == -1 or one ==1:
-                    #         golds.append('')
-                    #     else:
-                    #         golds.append(char_list[one])
-
                     golds = [char_list[one] for one in arr if one not in (sos_id, eos_id, -1)]
                     gold_txt.append(' '.join(golds))
-                    #print(gold_txt)
                 gold_all_txt.extend(gold_txt)
-            
-                #print(' '.join(golds))
-                #print(pred_argmax, gold)
 
             # Keep track of metrics
             losses.update(loss.item())
         else:
             break
-        #print(pred_all_txt)
-    #print(gold_all_txt)
+
     wer = wer_compute(pred_all_txt, gold_all_txt)
     print('wer: ', wer)
     
