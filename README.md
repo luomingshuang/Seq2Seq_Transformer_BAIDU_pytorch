@@ -55,3 +55,11 @@ python test_LM.py
 ##When we test the model with language model, we set the beam size in "test_LM.py" to 2 (3,4,5).
 python test_LM.py
 ```
+Our testing results as follows:
+```
+beam size=1, WER=10.63% (Baseline)
+beam size=2, WER=9.62%
+beam size=3, WER=9.22%
+beam size=4, WER=9.04%
+beam size=5, WER=8.97%
+```
